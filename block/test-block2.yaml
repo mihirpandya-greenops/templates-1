@@ -1,50 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
 metadata:
-  generateName: tester-
-  namespace: argo
-  labels:
-    example: 'true'
-    clusterName: 'hubcluster'
-    argo-namespace: 'argo-2'
+  name: workflow-template-submittable
 spec:
+  entrypoint: whalesay-template     # Fields other than "arguments" and "templates" not supported in v2.4 - v2.6
   arguments:
     parameters:
       - name: message
         value: hello world
-      - name: cmvalue
-        valueFrom:
-          configMapKeyRef:
-            name: simple-parameters
-            key: message
-      - name: cm-example
-        valueFrom:
-          configMapKeyRef:
-            key: message
-            name: simple-parameters
-      - name: job-name
-        valueFrom:
-          jsonPath: '{.metadata.name}'
-      - name: job-obj
-        valueFrom:
-          jqFilter: '.'
-      - name: previous_step_output
-        valueFrom:
-          path: /command_output/result.txt
-  entrypoint: argosay
   templates:
-    - name: argosay
+    - name: whalesay-template
       inputs:
         parameters:
           - name: message
-            value: '{{workflow.parameters.message}}'
       container:
-        name: main
-        image: 'argoproj/argosay:v2'
-        command:
-          - /argosay
-        args:
-          - echo
-          - '{{inputs.parameters.message}}'
-  ttlStrategy:
-    secondsAfterCompletion: 300
-  podGC:
-    strategy: OnPodCompletion
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["{{inputs.parameters.message}}"]
