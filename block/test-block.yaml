@@ -16,6 +16,12 @@ spec:
           - name: test-param
           - name: version
           - name: commit
+    - name: another-test-template
+      inputs:
+        parameters:
+          - name: test
+          - name: name
+          - name: author
       container:
         image: docker/whalesay
         command: [cowsay]
