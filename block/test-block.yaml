@@ -13,6 +13,9 @@ spec:
       inputs:
         parameters:
           - name: message
+          - name: test-param
+          - name: version
+          - name: commit
       container:
         image: docker/whalesay
         command: [cowsay]
