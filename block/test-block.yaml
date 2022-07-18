@@ -16,6 +16,14 @@ spec:
           - name: test-param
           - name: version
           - name: commit
+          - name: some-name
+          - name: another
+          - name: one
+          - name: two
+          - name: another-test
+          - name: lot-params
+          - name: param
+          - name: another-param
     - name: another-test-template
       inputs:
         parameters:
