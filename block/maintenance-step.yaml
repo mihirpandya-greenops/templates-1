@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: enable-maintenance-mode
+spec:
+  arguments:
+    parameters:
+    - name: env-name
+  templates:
+  - name: maintenance-mode
+    script:
+      image: python:3.7-alpine3.16
+      command: [python]
+      source: |
+        import random
+        i = random.randint(0,100)
+        print("{{env-name}}")
+        print(i)
