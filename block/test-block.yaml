@@ -16,7 +16,6 @@ spec:
     - name: another-test-template
       inputs:
         parameters:
-          - name: test
           - name: name
           - name: author
       container:
