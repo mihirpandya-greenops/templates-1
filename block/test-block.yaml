@@ -3,7 +3,6 @@ kind: WorkflowTemplate
 metadata:
   name: workflow-template-submittable
 spec:
-  entrypoint: whalesay-template     # Fields other than "arguments" and "templates" not supported in v2.4 - v2.6
   arguments:
     parameters:
       - name: message
@@ -13,11 +12,6 @@ spec:
       inputs:
         parameters:
           - name: message
-    - name: another-test-template
-      inputs:
-        parameters:
-          - name: name
-          - name: author
       container:
         image: docker/whalesay
         command: [cowsay]
