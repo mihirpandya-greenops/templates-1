@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: test-template
+spec:
+  arguments:
+    parameters:
+    - name: message
+      value: hello
+  templates:
+  - name: suspend-name
+    inputs: 
+      parameters: 
+      - name: message
+        value: hello
+    suspend:
+      duration: "5s"
