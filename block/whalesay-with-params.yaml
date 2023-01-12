@@ -19,3 +19,12 @@ spec:
         image: docker/whalesay
         command: [cowsay]
         args: ["{{inputs.parameters.message}}"]
+    - name: another-whalesay
+      inputs:
+        parameters:
+          - name: test
+          - name: surname
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["{{inputs.parameters.message}}"]
