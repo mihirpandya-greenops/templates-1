@@ -14,8 +14,8 @@ spec:
           - name: message
       outputs:
         parameters:
-        - name: hello-param
-          valueFrom: /tmp/hello_world.txt
+          - name: hello-param
+            valueFrom: /tmp/hello_world.txt
       container:
         image: docker/whalesay
         command: [cowsay]
