@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: argocd-sync-and-wait
+  namespace: argo
+spec:
+  workflowMetadata:
+  entrypoint: output-example
+  templates:
+    - name: output-example
+      outputs:
+        parameters:
+          - name: greenops-argocd-info
+            valueFrom:
+              path: greenops-output.txt
+          - name: out-param
+            value: out-param-value
+          - name: output-another
+            value: out-default-value
+        artifacts:
+          - name: hello-art
+            path: /tmp/hello_world.txt
+      inputs:
+        parameters:
+          - name: argocd-version
+            value: v1.6.0
+          - name: application-name
+          - name: revision
