@@ -15,6 +15,8 @@ spec:
               path: greenops-output.txt
           - name: out-param
             value: out-param-value
+          - name: output-another
+            value: out-default-value
         artifacts:
           - name: hello-art
             path: /tmp/hello_world.txt
