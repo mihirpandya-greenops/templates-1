@@ -15,6 +15,7 @@ spec:
           - name: message
           - name: name
           - name: version
+            value: 1.12
       container:
         image: docker/whalesay
         command: [cowsay]
