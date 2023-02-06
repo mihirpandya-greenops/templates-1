@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: github-wait
+  namespace: argo
+spec:
+  entrypoint: pr
+  templates:
+    - name: decide-release-version
+      inputs:
+        parameters:
+        - name: image-names
+        - name: image-tags
+      outputs:
+        parameters:
+        - name: release-version
+          valueFrom:
+            path: release-version.txt
+      script:
+        image: docker.io/greenopsinc/pygithub
+        command: [python]
+        source: |
+          image_names = {{inputs.parameters.image-names}}
+          image_tags = {{inputs.parameters.image-tags}}
+          for idx in range(len(image_names)):
+            if image_names[idx].startswith("1mihirpandya/ks-guestbook-demo"):
+              with open('release-version.txt', 'w') as file:
+                file.write(image_tags[idx])
+              break
