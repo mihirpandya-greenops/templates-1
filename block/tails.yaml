@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: tails-
+spec:
+  templates:
+  - name: tails
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        print("tails")
