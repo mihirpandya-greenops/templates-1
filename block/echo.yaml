@@ -5,8 +5,9 @@ metadata:
 spec:
   templates:
   - name: echo
+    inputs: 
+      parameters: 
+      - name: message
     container:
       image: alpine:3.7
       command: [echo, "{{inputs.parameters.message}}"]
-      args:
-        - "{{inputs.parameters.message}}"
