@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: sleep-n-sec-
+spec:
+  templates:
+  - name: sleep-n-sec
+    inputs: 
+      parameters: 
+      - name: message
+    container:
+      image: alpine:latest
+      command: [sh, -c]
+      args:
+        - 'echo sleeping for {{inputs.parameters.seconds}} seconds; sleep {{inputs.parameters.seconds}}; echo done'
