@@ -9,4 +9,4 @@ spec:
       image: alpine:3.7
       command: [echo, "{{inputs.parameters.message}}]
       args:
-        - '{{inputs.parameters.message}}'
+        - "{{inputs.parameters.message}}"
