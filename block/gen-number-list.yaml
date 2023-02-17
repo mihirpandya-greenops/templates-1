@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: gen-number-list-
+spec:
+  templates:
+  - name: gen-number-list
+    script:
+      image: python:alpine3.6
+      command: [python]
+      source: |
+        import json
+
+        import sys
+
+        json.dump([i for i in range(20, 31)], sys.stdout)
