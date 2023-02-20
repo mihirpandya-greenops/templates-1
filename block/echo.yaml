@@ -5,8 +5,12 @@ metadata:
 spec:
   templates:
   - name: print-message
+    inputs: 
+      parameters: 
+      - name: message
     container:
       image: alpine:latest
       command: [sh, -c]
       args:
-        - 'echo result was: {{inputs.parameters.message}}'
+        - 'echo'
+        - '{{inputs.parameters.message}}'
