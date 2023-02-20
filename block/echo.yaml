@@ -1,13 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: echo-
+  name: print-message-template
 spec:
   templates:
-  - name: echo
-    inputs: 
-      parameters: 
-      - name: message
+  - name: print-message
     container:
-      image: alpine:3.7
-      command: [echo, "{{inputs.parameters.message}}"]
+      image: alpine:latest
+      command: [sh, -c]
+      args:
+        - 'echo result was: {{inputs.parameters.message}}'
