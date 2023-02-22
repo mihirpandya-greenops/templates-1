@@ -5,6 +5,7 @@ metadata:
 spec:
   templates:
   - name: nginx-server
+    daemon: true
     container:
       image: nginx:1.13
       readinessProbe:
