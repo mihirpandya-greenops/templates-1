@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: print-message-template
+spec:
+  templates:
+  - name: print-message
+    timeout: "{{inputs.parameters.timeout}}"
+    inputs: 
+      parameters: 
+      - name: timeout
+    container:
+      image: alpine:latest
+      command: [sleep, "15s"]
