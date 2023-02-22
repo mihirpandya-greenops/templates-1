@@ -1,10 +1,10 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: print-message-template
+  name: echo-timeout
 spec:
   templates:
-  - name: print-message
+  - name: echo-timeout
     timeout: "{{inputs.parameters.timeout}}"
     inputs: 
       parameters: 
