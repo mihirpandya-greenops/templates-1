@@ -1,12 +1,10 @@
-# run forever
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: WorkflowTemplate
 metadata:
   name: forever
 spec:
-  entrypoint: main
   templates:
-    - name: main
-      container:
-        image: docker/whalesay:latest
-        command: [sh, "-c", "for I in $(seq 1 1000) ; do echo $I ; sleep 1s; done"]
+  - name: forever
+    container:
+      image: docker/whalesay:latest
+      command: [sh, "-c", "for I in $(seq 1 1000) ; do echo $I ; sleep 1s; done"]
