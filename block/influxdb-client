@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: influxdb-client
+spec:
+  templates:
+  - name: influxdb-client
+    inputs: 
+      parameters: 
+      - name: cmd
+    container:
+      image: appropriate/curl:latest
+      command: [sh, -c]
+      args:
+        - '{{inputs.parameters.cmd}}'
