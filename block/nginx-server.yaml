@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: nginx-server
+spec:
+  templates:
+  - name: nginx-server
+    container:
+      image: nginx:1.13
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 80
+        initialDelaySeconds: 2
+        timeoutSeconds: 1
