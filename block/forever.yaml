@@ -1,10 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: forever
+  name: flip-coin
 spec:
   templates:
-  - name: forever
+  - name: flip-coin
     container:
       image: docker/whalesay:latest
       command: [sh, "-c", "for I in $(seq 1 1000) ; do echo $I ; sleep 1s; done"]
+    outputs:
+      parameters:
+      - name: result
+        valueFrom:
+          path: /result.txt
