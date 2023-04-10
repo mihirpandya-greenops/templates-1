@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: echo-template
+spec:
+  arguments:
+    parameters:
+    - name: arg-name
+      value: val
+    - name: arg-without-value
+  templates:
+  - name: echo
+    retryStrategy:
+      limit: "1"
+      retryPolicy: "Always"
+      backoff:
+        duration: "1"
+        factor: "1"
+        maxDuration: "2m"
+    inputs: 
+      parameters: 
+      - name: input-name
+        value: input-value
+      - name: input-without-value
+    script:
+      image: python:alpine3.6
+      command: [python]
+      env:
+        - name: envName
+          valueFrom:
+            secretKeyRef:
+              name: "secret-name"
+              key: secret-key
+      source: |
+        import random
+        i = random.randit()
+        
+        print(i)
+    outputs:
+      parameters:
+      - name: output-name
+        valueFrom:
+          path: /tmp/text.txt
