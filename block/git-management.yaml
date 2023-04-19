@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: git-management
+spec:
+  templates:
+  - name: create-new-pr
+    inputs: 
+      parameters: 
+      - name: bitbucket-username
+      - name: bitbucket-url
+        value: bitbucket.org
+      - name: file-path
+        value: /folder/file/path.yaml
+      - name: variable-path
+        value: .common.image.name
+      - name: new-image-tag
+    script:
+      image: greenopsinc/git
+      command: [/bin/sh]
+      env:
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: "bitbucket-secret"
+              key: password
+      source: |
+        apk add yq
+        git clone https://{{inputs.parameters.bitbucket-username}}:$PASSWORD@{{inputs.parameters.bitbucket-url}}/greenopsinc/test.git
+        git checkout -b update-image-{{inputs.parameters.new-image-tag}}
+        yq -i '{{inputs.parameters.variable-path}} = "{{inputs.parameters.new-image-tag}}"' {{inputs.parameters.file-path}}
+        git add {{inputs.parameters.file-path}}
+        git commit -m "Updating image version to {{inputs.parameters.new-image-tag}}"
+        git push
