@@ -1,0 +1,16 @@
+arguments:
+  parameters:
+    - name: asdf-repo
+      value: ""
+    - name: asdf-branch
+      value: ""
+    - name: asdf-docker-work-dir
+      value: ""
+    - name: asdf-image-repo-path-tag
+      value: ""
+    - name: asdf-step-name
+      value: ""
+    - name: asdf-pipeline-name
+      value: ""
+    - name: asdf-team-name
+      value: ""
