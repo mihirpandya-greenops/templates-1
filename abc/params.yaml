@@ -1,0 +1,16 @@
+arguments:
+  parameters:
+    - name: hj-repo
+      value: ""
+    - name: hj-branch
+      value: ""
+    - name: hj-docker-work-dir
+      value: ""
+    - name: hj-image-repo-path-tag
+      value: ""
+    - name: hj-step-name
+      value: ""
+    - name: hj-pipeline-name
+      value: ""
+    - name: hj-team-name
+      value: ""
