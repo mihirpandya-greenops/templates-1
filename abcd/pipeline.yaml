@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: xyz
+spec:
+  entrypoint: entry
+  templates:
+  - name: entry
+    dag:
+      tasks:
+      - name: hj
+        templateRef:
+          name: test
+          template: kaniko
+        arguments:
+          parameters:
+          - name: repo
+            value: "{{workflow.parameters.hj-repo}}"
+          - name: branch
+            value: "{{workflow.parameters.hj-branch}}"
+          - name: docker-work-dir
+            value: "{{workflow.parameters.hj-docker-work-dir}}"
+          - name: image-repo-path-tag
+            value: "{{workflow.parameters.hj-image-repo-path-tag}}"
+          - name: step-name
+            value: "{{workflow.parameters.hj-step-name}}"
+          - name: pipeline-name
+            value: "{{workflow.parameters.hj-pipeline-name}}"
+          - name: team-name
+            value: "{{workflow.parameters.hj-team-name}}"
