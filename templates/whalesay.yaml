@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: whalesay
+spec:
+  templates:
+  - name: whalesay
+    inputs: 
+      parameters: 
+      - name: name
+    container:
+      image: docker/whalesay
+      command: [cowsay]
+      args:
+        - '{{inputs.parameters.name}}'
