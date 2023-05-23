@@ -1,0 +1,4 @@
+arguments:
+  parameters:
+    - name: print-name
+      value: xyz
