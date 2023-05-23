@@ -1,0 +1,28 @@
+arguments:
+  parameters:
+    - name: deploy-app-1-argocd-version
+      value: v2.0.5
+    - name: deploy-app-1-application-name
+      value: app-1
+    - name: deploy-app-1-revision
+      value: HEAD
+    - name: deploy-app-1-flags
+      value: --
+    - name: deploy-app-1-argocd-server-address
+      value: bfmbmtn05i.greenops.io
+    - name: deploy-app-1-argocd-credentials-secret
+      value: argocd-user
+    - name: run-tests-name
+      value: Running fake tests in environment...
+    - name: deploy-app-2-argocd-version
+      value: v2.0.5
+    - name: deploy-app-2-application-name
+      value: app-2
+    - name: deploy-app-2-revision
+      value: HEAD
+    - name: deploy-app-2-flags
+      value: --
+    - name: deploy-app-2-argocd-server-address
+      value: bfmbmtn05i.greenops.io
+    - name: deploy-app-2-argocd-credentials-secret
+      value: argocd-user
