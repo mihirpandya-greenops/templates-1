@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: workflowname
+spec:
+  entrypoint: entry
+  templates:
+  - name: entry
+    dag:
+      tasks:
+      - name: step1
+        templateRef:
+          name: suspend
+          template: suspend
+      - name: print
+        templateRef:
+          name: whalesay
+          template: whalesay
+        dependencies: [step1]
+        arguments:
+          parameters:
+          - name: name
+            value: "{{workflow.parameters.print-name}}"
