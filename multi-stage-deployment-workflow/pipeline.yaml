@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: deployment-workflow
+spec:
+  entrypoint: entry
+  templates:
+  - name: entry
+    dag:
+      tasks:
+      - name: deploy-app-1
+        templateRef:
+          name: argocd-step
+          template: argocd-sync-and-wait
+        arguments:
+          parameters:
+          - name: argocd-version
+            value: "{{workflow.parameters.deploy-app-1-argocd-version}}"
+          - name: application-name
+            value: "{{workflow.parameters.deploy-app-1-application-name}}"
+          - name: revision
+            value: "{{workflow.parameters.deploy-app-1-revision}}"
+          - name: flags
+            value: "{{workflow.parameters.deploy-app-1-flags}}"
+          - name: argocd-server-address
+            value: "{{workflow.parameters.deploy-app-1-argocd-server-address}}"
+          - name: argocd-credentials-secret
+            value: "{{workflow.parameters.deploy-app-1-argocd-credentials-secret}}"
+      - name: wait-for-approval
+        templateRef:
+          name: suspend
+          template: suspend
+        dependencies: [run-tests]
+      - name: run-tests
+        templateRef:
+          name: whalesay
+          template: whalesay
+        dependencies: [deploy-app-1]
+        arguments:
+          parameters:
+          - name: name
+            value: "{{workflow.parameters.run-tests-name}}"
+      - name: deploy-app-2
+        templateRef:
+          name: argocd-step
+          template: argocd-sync-and-wait
+        dependencies: [wait-for-approval]
+        arguments:
+          parameters:
+          - name: argocd-version
+            value: "{{workflow.parameters.deploy-app-2-argocd-version}}"
+          - name: application-name
+            value: "{{workflow.parameters.deploy-app-2-application-name}}"
+          - name: revision
+            value: "{{workflow.parameters.deploy-app-2-revision}}"
+          - name: flags
+            value: "{{workflow.parameters.deploy-app-2-flags}}"
+          - name: argocd-server-address
+            value: "{{workflow.parameters.deploy-app-2-argocd-server-address}}"
+          - name: argocd-credentials-secret
+            value: "{{workflow.parameters.deploy-app-2-argocd-credentials-secret}}"
