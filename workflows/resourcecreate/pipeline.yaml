@@ -24,7 +24,8 @@ spec:
         apiVersion: batch/v1
         kind: Job
         metadata:
-          generateName: pi-job-
+          generateName: pi-jo
+          namespace: default
         spec:
           template:
             metadata:
